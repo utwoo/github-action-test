@@ -1,0 +1,16 @@
+name: Env Schedule CI
+
+on: 
+  schedule: 
+    - cron: '*/15 * * * *'
+    
+jobs:
+  Env-Schedule:
+    name: env-schedule-build
+    runs-on: ubuntu-lastest
+
+    steps:
+    - name: Print a greeting
+      env: 
+        MY_VAR: Hi
+      run: echo $MY_VAR
