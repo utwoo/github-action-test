@@ -1,0 +1,25 @@
+name: Go Test
+
+on:
+  push:
+    branches:
+      - go-action-test
+    
+jobs:
+  go-test:
+    run-on: ubuntu-latest
+
+    steps:
+    - name: Set up Go 1.12
+      uses: action/setup-go@v1
+      with:
+        go-version: 1.12
+    
+    - name: Check out source code
+      uses: action/checkout@v1
+
+    - name: Build
+      run: go build .
+
+    - name: Test
+      run: ./github-action-test
