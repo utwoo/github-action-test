@@ -7,7 +7,7 @@ on:
 jobs:
   Env-Schedule:
     name: env-schedule-build
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Print a greeting
