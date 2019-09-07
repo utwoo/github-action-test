@@ -8,8 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Env Parameters
-        run: |
+    - name: Print Env Parameters
+      run: |
         echo Home ${HOME}
         echo GITHUB_WORKFLOW ${GITHUB_WORKFLOW}
         echo GITHUB_ACTION ${GITHUB_ACTION}
