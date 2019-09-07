@@ -1,0 +1,22 @@
+name: AzureWebAppSample
+
+on:
+  push:
+    branches:
+      - azure-webapp-test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out the repo
+        uses: actions/checkout@v1
+      - name: install dependencies
+        run: |
+          npm install
+      - name: deployment
+        uses: azure/appservice-actions/webapp@master
+        with: 
+          app-name: node-rn
+          publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+
