@@ -1,0 +1,34 @@
+name: "Terraform Deploy"
+on: 
+  push:
+    branches:
+      - terraform-azure
+
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@terraform-azure
+      - name: "Terraform Format"
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.15.3
+          tf_actions_subcommand: "fmt"
+          tf_actions_working_dir: "./scripts"
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Terraform Init"
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.15.3
+          tf_actions_subcommand: "init"
+          tf_actions_working_dir: "./scripts"
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+
+
