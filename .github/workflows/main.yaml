@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
-        uses: actions/checkout@terraform-azure
+        uses: actions/checkout@master
       - name: "Terraform Format"
         uses: hashicorp/terraform-github-actions@master
         with:
