@@ -1,16 +1,17 @@
 # Sets global variables for this Terraform project.
 
 variable "app_name" {
-  default = "utwooflixtube"
+  default = "utwooGithubAction"
 }
 variable "location" {
   default = "West US"
 }
 
 variable "admin_username" {
-  default = "linux_admin"
+  default = "admin"
 }
 
+# variables for azure
 variable "agent_client_id" {}
 variable "agent_client_secret" {}
 variable "subscription_id" {}
