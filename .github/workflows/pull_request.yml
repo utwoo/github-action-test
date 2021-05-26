@@ -1,3 +1,5 @@
+name: Pull Request Test
+
 on: 
   pull_request:
     branches:
@@ -12,3 +14,4 @@ jobs:
     - name: Unit Test
       run: |
         echo "do test"
+        exit 1
