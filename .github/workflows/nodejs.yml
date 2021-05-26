@@ -25,6 +25,5 @@ jobs:
         npm install
         npm run build --if-present
         npm test
-        echo ${{ secrets.SuperSecret }}
       env:
         CI: true
