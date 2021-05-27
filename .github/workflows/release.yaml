@@ -1,0 +1,49 @@
+name: Release
+
+on: 
+  push:
+    tags:
+      - v**
+
+jobs:
+  build-and-upload:
+    name: Build and Upload Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v2
+      - name: Upload files
+        uses: actions/upload-artifact@v2
+        with: 
+          name: staitc-file
+          path: dist/
+  release-project:
+    name: Release Project
+    runs-on: ubuntu-latest
+    needs: build-and-upload
+    steps:
+      - name: Download files
+        uses: actions/download-artifact@v2
+        with:
+          name: staitc-file
+      - name: Archive files
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: helloworld.zip          
+      - name: Create Github Release
+        id: create-new-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+      - name: Upload asset to Github Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url}}
+          asset_path: ./helloworld.zip
+          asset_name: helloworld-${{ github.ref }}.zip
+          asset_content_type: application/zip
