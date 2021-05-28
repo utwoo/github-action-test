@@ -1,0 +1,30 @@
+name: Docker Publish
+
+on: 
+  push:
+    tags:
+      - v**
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set version
+        id: version
+        run: |
+          VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
+          echo ::set-output name=version::$VERSION
+          echo "Version $VERSION"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: zhuxiang1212/github-action-test:${{ steps.version.outputs.version }}
