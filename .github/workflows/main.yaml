@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - terraform-azure
+      - master
 
 jobs:
   terraform:
